@@ -42,7 +42,7 @@ public class MainScene {
         createExitButtonAction(cameraController);
 
         // Create the layout for the scene
-        rootLayout = new VBox();
+        rootLayout = new VBox(20);
         rootLayout.setAlignment(Pos.CENTER);
 
         // Update the pinCorrectLabel with the pin status
