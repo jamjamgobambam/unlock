@@ -141,6 +141,23 @@ public class LockScene {
     }
 
     /**
+     * Sets the text of the current pin label to the specified pin.
+     * If the pin is less than 4 characters, the label will be padded with hyphens.
+     * @param currentPin the current pin to display in the label
+     */
+    public void setPinLabel(String currentPin) {
+        String pinText = "";
+
+        pinText += currentPin;
+
+        while (pinText.length() < 4) {
+            pinText += "-";
+        }
+
+        currentPinLabel.setText(pinText);
+    }
+
+    /**
      * Sets the action for the exit button. When clicked, it
      * stops the camera capture and exits the program.
      */

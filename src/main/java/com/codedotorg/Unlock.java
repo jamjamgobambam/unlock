@@ -73,6 +73,9 @@ public class Unlock {
         }));
     }
 
+    /**
+     * This method is called when the application is started. It loads the lock scene and updates the app.
+     */
     public void startApp() {
         loadLockScene();
         updateApp();
@@ -100,6 +103,13 @@ public class Unlock {
         cameraLoading.showLoadingAnimation(lock.getCameraView());
     }
 
+    /**
+     * Updates the app by getting the predicted class and score from the CameraController,
+     * showing the user's response and confidence score in the app, adding the user's response
+     * to the pin so far, displaying the current pin so far, and checking if all four numbers
+     * have been given. If all four numbers have been given, creates a pause transition of 3 seconds,
+     * sets the action to execute after the pause, and starts the pause transition.
+     */
     public void updateApp() {
         timeline = new Timeline(new KeyFrame(Duration.seconds(3), event -> {
             // Get the predicted class and score from the CameraController
@@ -112,6 +122,9 @@ public class Unlock {
 
                 // Add the user's response to the pin so far
                 String userPin = logic.createUserPin(predictedClass);
+
+                // Displays the current pin so far
+                lock.setPinLabel(userPin);
 
                 // Check if all four numbers have been given
                 if (userPin.length() == 4) {
@@ -129,6 +142,12 @@ public class Unlock {
                 }
             }
         }));
+
+        // Specify that the animation should repeat indefinitely
+        timeline.setCycleCount(Timeline.INDEFINITE);
+
+        // Start the animation
+        timeline.play();
     }
 
     /**
